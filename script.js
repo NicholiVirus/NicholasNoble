@@ -1,7 +1,7 @@
 const P = window.PROJECTS;
 const imgStyle = p => p.image ? `style="background-image:url('${p.image}')"` : "";
 const imgClass = p => p.image ? "img" : "img ph";
-const phText = p => p.image ? "" : "add photo";
+const phText = p => p.image ? "" : `IMG ${p.img} · add photo`;
 
 // Carousel
 const featured = P.filter(p => p.featured);
