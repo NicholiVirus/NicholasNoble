@@ -1,6 +1,5 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 // Mounts a spinning, draggable CAD viewer into every [data-cad] element.
@@ -22,7 +21,7 @@ function mount(el) {
   controls.autoRotate = !matchMedia("(prefers-reduced-motion: reduce)").matches; controls.autoRotateSpeed = 1.6;
 
   const pivot = new THREE.Group(); scene.add(pivot);
-  const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
+  const loader = new GLTFLoader();
   const status = el.querySelector(".cad-status");
   const cache = {};
   function show(url) {
@@ -38,17 +37,24 @@ function mount(el) {
       controls.target.set(0, 0, 0); controls.update();
     };
     if (cache[url]) return done(cache[url]);
-    loader.load(url, (g) => {
-      const root = g.scene;
-      root.rotation.x = -Math.PI / 2; // Onshape is Z-up, three.js is Y-up
-      root.updateMatrixWorld(true);
-      // Clean up the look: keep Onshape's part colours, give them a satin machined finish.
-      root.traverse((o) => {
-        if (!o.isMesh) return;
-        for (const m of [].concat(o.material)) { m.metalness = 0.35; m.roughness = 0.5; m.side = THREE.DoubleSide; }
-      });
-      cache[url] = root; done(root);
-    }, undefined, () => { status.textContent = "Model failed to load."; });
+    fetch(url).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then((json) => new Promise((res, rej) => loader.parse(toGLB(json), "", res, rej)))
+      .then((g) => {
+        const root = g.scene;
+        root.rotation.x = -Math.PI / 2; // Onshape is Z-up, three.js is Y-up
+        root.updateMatrixWorld(true);
+        root.traverse((o) => {
+          if (!o.isMesh) return;
+          const m = o.material;
+          if (m.name === "polycarbonate") {
+            // Clear polycarbonate hopper walls: see-through, slight blue tint, glossy.
+            o.material = new THREE.MeshPhysicalMaterial({ color: 0xcfe6f7, transparent: true, opacity: 0.22, roughness: 0.08, metalness: 0, side: THREE.DoubleSide, depthWrite: false });
+            o.renderOrder = 2;
+          } else { m.metalness = 0.35; m.roughness = 0.5; }
+        });
+        cache[url] = root; done(root);
+      })
+      .catch((e) => { console.error(e); status.textContent = "Model failed to load."; });
   }
   el.querySelectorAll("[data-model]").forEach((b) => b.onclick = () => {
     el.querySelectorAll("[data-model]").forEach((x) => x.classList.toggle("active", x === b));
@@ -61,4 +67,22 @@ function mount(el) {
     if (canvas.width !== Math.round(w * renderer.getPixelRatio())) { renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
   }
   renderer.setAnimationLoop(() => { resize(); controls.update(); renderer.render(scene, camera); });
+}
+
+// The models ship as glTF JSON with one base64 buffer (artifact hosting won't serve .glb).
+// Rebuild a GLB in memory so nothing needs to fetch a data: URL.
+function toGLB(json) {
+  const b64 = json.buffers[0].uri.split(",")[1];
+  const bin = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+  delete json.buffers[0].uri;
+  const pad = (n) => (n + 3) & ~3;
+  let jsonBytes = new TextEncoder().encode(JSON.stringify(json));
+  const jl = pad(jsonBytes.length), bl = pad(bin.length);
+  const out = new Uint8Array(12 + 8 + jl + 8 + bl), dv = new DataView(out.buffer);
+  dv.setUint32(0, 0x46546c67, true); dv.setUint32(4, 2, true); dv.setUint32(8, out.length, true);
+  dv.setUint32(12, jl, true); dv.setUint32(16, 0x4e4f534a, true);
+  out.fill(0x20, 20, 20 + jl); out.set(jsonBytes, 20);
+  dv.setUint32(20 + jl, bl, true); dv.setUint32(24 + jl, 0x004e4942, true);
+  out.set(bin, 28 + jl);
+  return out.buffer;
 }
