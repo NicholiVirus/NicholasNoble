@@ -87,3 +87,26 @@ footer{text-align:center;padding:36px;color:var(--muted);font-size:.85rem;border
   .stats{gap:32px}.hero{padding:72px 0 48px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+.hero{padding:88px 0 64px}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.hero-text h1{max-width:none}
+.cad{position:relative;margin:0}
+.cad canvas{width:100%;aspect-ratio:1/1;display:block;cursor:grab;border:1px solid var(--line);border-radius:var(--r);background:radial-gradient(circle at 50% 40%,var(--card),var(--bg2))}
+.cad canvas:active{cursor:grabbing}
+.cad-status{position:absolute;top:45%;left:0;right:0;text-align:center;color:var(--muted);font-size:.9rem}
+.cad figcaption{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:.82rem;color:var(--muted)}
+.cad-tabs{display:flex;gap:4px}
+.cad-tabs button{font:500 .82rem var(--sans);padding:4px 10px;border:1px solid transparent;border-radius:var(--r);background:none;color:var(--muted);cursor:pointer}
+.cad-tabs button.active{border-color:var(--line);background:var(--card);color:var(--text)}
+@media(max-width:800px){.hero-grid{grid-template-columns:1fr}}
+.story{list-style:none;margin-top:12px}
+.story>li{display:grid;grid-template-columns:140px 1fr;gap:28px;padding:28px 0;border-top:1px solid var(--line)}
+.story .date{color:var(--muted);font-size:.88rem;padding-top:4px}
+.story h3{font-family:var(--serif);font-size:1.35rem;font-weight:600;margin-bottom:6px}
+.story p{color:var(--muted);margin-bottom:10px;max-width:640px}
+.story p b{color:var(--text);font-weight:600}
+.facts{list-style:none;display:flex;gap:40px;flex-wrap:wrap;margin:16px 0}
+.facts strong{display:block;font-family:var(--serif);font-size:1.6rem;font-weight:600}
+.facts span{color:var(--muted);font-size:.85rem}
+.story-img{aspect-ratio:16/9;max-width:560px;margin-top:14px;border:1px solid var(--line);border-radius:var(--r)}
+@media(max-width:800px){.story>li{grid-template-columns:1fr;gap:6px}}

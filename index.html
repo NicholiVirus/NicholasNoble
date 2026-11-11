@@ -14,6 +14,7 @@
     <a href="#top" class="logo">Nicholas Noble</a>
     <nav>
       <a href="#featured">Featured</a>
+      <a href="#robots">Robots</a>
       <a href="#projects">Projects</a>
       <a href="#about">About</a>
       <a href="#resume">Resume</a>
@@ -25,12 +26,27 @@
   <main id="top">
     <!-- HERO -->
     <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-text">
       <p class="eyebrow">Robotics · CAD · Mechanical Engineering</p>
       <h1>Nicholas Noble designs and builds robots.</h1>
       <p class="lead">Aspiring mechanical / materials engineer. FIRST Robotics varsity co-leader and NASA Goddard scholar intern.</p>
       <div class="hero-cta">
         <a href="#featured" class="btn">See my work</a>
         <a href="resume.pdf" class="btn btn-ghost" target="_blank">Download resume</a>
+      </div>
+      </div>
+        <figure class="cad" data-cad>
+          <canvas aria-label="3D model of my FRC robot. Drag to rotate."></canvas>
+          <p class="cad-status">Loading model…</p>
+          <figcaption>
+            <div class="cad-tabs">
+              <button class="active" data-model="assets/cad/robot-v2.glb">Rebuilt robot</button>
+              <button data-model="assets/cad/robot-v1.glb">First robot</button>
+            </div>
+            <span>Team 526 · FRC 2026 REBUILT · my CAD in Onshape. Drag to rotate.</span>
+          </figcaption>
+        </figure>
       </div>
       <ul class="stats">
         <li><strong data-count="100">0</strong><span>Community volunteer hours</span></li>
@@ -51,6 +67,48 @@
         <div class="track" id="track"></div>
       </div>
       <div class="dots" id="dots"></div>
+    </section>
+
+    <!-- ROBOTS STORY -->
+    <section id="robots" class="section">
+      <div class="section-head"><h2>Team 526 Robots</h2></div>
+      <p class="lead">I co-lead the mechanical side of FRC Team 526, the Saxon Sparks at Langley High School. The robot spinning at the top of this page is my CAD. Here's how we got there.</p>
+      <ol class="story">
+        <li>
+          <span class="date">Jan 2026</span>
+          <div><h3>The first robot</h3>
+          <p>My first real experience taking a robot from an empty Onshape document to a full assembly. It took about <b>1 week to design and 2 weeks to fabricate</b>. Click "First robot" under the 3D model to see it.</p></div>
+        </li>
+        <li>
+          <span class="date">Feb – Mar 2026</span>
+          <div><h3>The main REBUILT season robot</h3>
+          <p>For the 2026 FRC game, <i>REBUILT</i>, we redesigned the robot from the ground up on the same timeline. We competed at <b>2 district events</b>.</p>
+          <ul class="facts">
+            <li><strong>Alliance 8</strong><span>captain, FCH District Alexandria VA (Mar 6–8)</span></li>
+            <li><strong>51 / 140</strong><span>FCH district ranking</span></li>
+          </ul>
+          <p>We fell short of the District Championship.</p></div>
+        </li>
+        <li>
+          <span class="date">Summer 2026</span>
+          <div><h3>Rebuilt for WV ROCKS</h3>
+          <p>We didn't stop there. We rebuilt the robot and took it to the <b>WV ROCKS</b> off-season competition. This is the "Rebuilt robot" shown at the top.</p>
+          <ul class="facts"><li><strong>TBD</strong><span>WV ROCKS rank / finish (add)</span></li></ul></div>
+        </li>
+        <li>
+          <span class="date">Fall 2026 · now</span>
+          <div><h3>Bunnybots 2026: Harvest Havoc</h3>
+          <p>Our current build is for Blair Bunnybots 2026. Robots haul carrots from their farm, stock shelves in their pantry, bake carrot cakes in the oven, and park at the dinner table in a 2:30 match (15 s autonomous plus 2:15 driver control).</p>
+          <div class="ph story-img">Image 15 · Bunnybots robot / field</div></div>
+        </li>
+        <li>
+          <span class="date">Fall 2026</span>
+          <div><h3>Strategy simulator</h3>
+          <p>To decide what our Bunnybots robot should do before we built it, I made <b>Harvest Havoc Sim</b>: a browser-based, multiplayer 3D driving simulator of the game. It runs official field geometry and scoring, swerve driving, AI opponents, and configurable mechanisms (intakes, elevator heights, hopper layouts), so we can test strategies and builds before cutting metal.</p>
+          <a class="more" href="https://github.com/NicholiVirus/TongueSimBunnybots" target="_blank" rel="noopener">View the simulator on GitHub</a>
+          <div class="ph story-img">Image 16 · simulator screenshot</div></div>
+        </li>
+      </ol>
     </section>
 
     <!-- PAST PROJECTS -->
@@ -144,5 +202,7 @@
 
   <script src="projects.js"></script>
   <script src="script.js"></script>
+  <script type="importmap">{"imports":{"three":"./vendor/three/three.module.js","three/addons/":"./vendor/three/addons/"}}</script>
+  <script type="module" src="cad.js"></script>
 </body>
 </html>
