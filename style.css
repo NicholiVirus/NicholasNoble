@@ -147,3 +147,4 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:16px;fl
 .foot-links{display:flex;gap:20px}
 .foot-links a:hover{color:var(--text)}
 @media(prefers-reduced-motion:reduce){.g-frame{transition:none}}
+.sim-note{font-size:.82rem;margin-top:8px}

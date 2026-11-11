@@ -60,6 +60,8 @@ document.addEventListener("click", e=>{
   document.getElementById("m-tags").textContent = `${p.year} · ${p.tags.join(", ")}`;
   document.getElementById("m-title").textContent = p.title;
   document.getElementById("m-desc").textContent = p.desc;
+  const ml = document.getElementById("m-link");
+  if (p.link) { ml.href = p.link; ml.hidden = false; } else ml.hidden = true;
   modal.hidden = false;
 });
 const closeM = ()=>modal.hidden = true;

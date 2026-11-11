@@ -38,7 +38,7 @@ window.PROJECTS = [
     desc: "Competed in LEGO Battlebots from 2022 to 2023, designing and building combat robots out of LEGO Technic for head-to-head matches." },
   { img: "16", title: "Harvest Havoc Strategy Simulator", year: 2026, tags: ["software","robotics"], featured: true, image: "",
     blurb: "A browser-based, multiplayer 3D simulator of Bunnybots 2026 that I built to test strategy and robot designs.",
-    desc: "Harvest Havoc Sim recreates Blair Bunnybots 2026 from the official field CAD and game manual: swerve driving, AI opponents, scoring, fouls and ranking points. You can configure each robot's mechanisms (ground, depot and ramp intakes, elevator height, passthrough or hopper layouts) to compare designs before building. Code: github.com/NicholiVirus/TongueSimBunnybots" },
+    desc: "Harvest Havoc Sim recreates Blair Bunnybots 2026 from the official field CAD and game manual: swerve driving, AI opponents, scoring, fouls and ranking points. You can configure each robot's mechanisms (ground, depot and ramp intakes, elevator height, passthrough or hopper layouts) to compare designs before building. Play it at toungesimbunnybots.onrender.com. Code: github.com/NicholiVirus/TongueSimBunnybots", link: "https://toungesimbunnybots.onrender.com/" },
   // ---- CAD slots: send CAD screenshots/renders for these numbers ----
   { img: "09", title: "CAD Design (coming soon)", year: 2026, tags: ["cad"], featured: false, image: "",
     blurb: "Placeholder for a CAD model (Fusion 360 / Onshape / Inventor).", desc: "Details coming soon." },
