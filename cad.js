@@ -2,12 +2,28 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
-// Mounts a spinning, draggable CAD viewer into every [data-cad] element.
+// ===== EDIT ROBOTS HERE =====
+// src: model file in assets/cad/ (leave "" until the CAD is ready; it's skipped in the rotation).
+// game.logo: optional image path (e.g. "assets/logos/rebuilt.png"); without one a text logo is shown.
+// game.url: link opened when the game logo is clicked (game animation / reveal video).
+const GAMES = {
+  rebuilt: { name: "REBUILT", season: "FRC 2026", logo: "",
+    url: "https://www.youtube.com/results?search_query=2026+FIRST+Robotics+Competition+REBUILT+Game+Animation" },
+  havoc: { name: "Harvest Havoc", season: "Bunnybots 2026", logo: "",
+    url: "https://www.youtube.com/results?search_query=Blair+Bunnybots+2026+Harvest+Havoc+game+reveal" },
+};
+const ROBOTS = [
+  { name: "First robot", note: "My first full robot CAD", src: "assets/cad/robot-v1.json", game: GAMES.rebuilt },
+  { name: "Rebuilt robot", note: "Rebuilt for WV ROCKS", src: "assets/cad/robot-v2.json", game: GAMES.rebuilt },
+  { name: "Bunnybots robot", note: "In progress", src: "", game: GAMES.havoc },
+].filter((r) => r.src);
+const CYCLE_MS = 8000;
+
 for (const el of document.querySelectorAll("[data-cad]")) mount(el);
 
 function mount(el) {
   const canvas = el.querySelector("canvas");
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, preserveDrawingBuffer: true });
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -16,52 +32,82 @@ function mount(el) {
   scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8a80, 2.2));
   const key = new THREE.DirectionalLight(0xffffff, 2.4); key.position.set(3, 5, 4); scene.add(key);
   const rim = new THREE.DirectionalLight(0xffffff, 1.0); rim.position.set(-4, 2, -3); scene.add(rim);
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const controls = new OrbitControls(camera, canvas);
   controls.enableZoom = false; controls.enablePan = false; controls.enableDamping = true;
-  controls.autoRotate = !matchMedia("(prefers-reduced-motion: reduce)").matches; controls.autoRotateSpeed = 1.6;
+  controls.autoRotate = !reduced; controls.autoRotateSpeed = 1.6;
 
   const pivot = new THREE.Group(); scene.add(pivot);
   const loader = new GLTFLoader();
   const status = el.querySelector(".cad-status");
-  const cache = {};
-  function show(url) {
-    status.hidden = false; status.textContent = "Loading model…";
-    const done = (root) => {
-      pivot.clear(); pivot.add(root); status.hidden = true;
-      const box = new THREE.Box3().setFromObject(root);
-      const size = box.getSize(new THREE.Vector3()), c = box.getCenter(new THREE.Vector3());
-      root.position.sub(c);
-      const r = size.length() / 2;
-      camera.position.copy(new THREE.Vector3(1, 0.6, 1).normalize().multiplyScalar(r / Math.sin(THREE.MathUtils.degToRad(camera.fov / 2)) * 1.05));
-      camera.near = r / 50; camera.far = r * 20; camera.updateProjectionMatrix();
-      controls.target.set(0, 0, 0); controls.update();
-    };
-    if (cache[url]) return done(cache[url]);
-    fetch(url).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then((json) => new Promise((res, rej) => loader.parse(toGLB(json), "", res, rej)))
-      .then((g) => {
-        const root = g.scene;
-        root.rotation.x = -Math.PI / 2; // Onshape is Z-up, three.js is Y-up
-        root.updateMatrixWorld(true);
-        root.traverse((o) => {
-          if (!o.isMesh) return;
-          const m = o.material;
-          if (m.name === "polycarbonate") {
-            // Clear polycarbonate hopper walls: see-through, slight blue tint, glossy.
-            o.material = new THREE.MeshPhysicalMaterial({ color: 0xcfe6f7, transparent: true, opacity: 0.22, roughness: 0.08, metalness: 0, side: THREE.DoubleSide, depthWrite: false });
-            o.renderOrder = 2;
-          } else { m.metalness = 0.35; m.roughness = 0.5; }
-        });
-        cache[url] = root; done(root);
-      })
-      .catch((e) => { console.error(e); status.textContent = "Model failed to load."; });
-  }
-  el.querySelectorAll("[data-model]").forEach((b) => b.onclick = () => {
-    el.querySelectorAll("[data-model]").forEach((x) => x.classList.toggle("active", x === b));
-    show(b.dataset.model);
-  });
-  show(el.querySelector("[data-model].active").dataset.model);
+  const nameEl = el.querySelector(".cad-name"), noteEl = el.querySelector(".cad-note");
+  const badge = el.querySelector(".game-badge"), dots = el.querySelector(".cad-dots");
+  const cache = new Map();
 
+  const load = (url) => {
+    if (!cache.has(url)) cache.set(url, fetch(url)
+      .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then((json) => new Promise((res, rej) => loader.parse(toGLB(json), "", res, rej)))
+      .then((g) => prepare(g.scene)));
+    return cache.get(url);
+  };
+
+  dots.innerHTML = ROBOTS.map((r, i) => `<button aria-label="Show ${r.name}"></button>`).join("");
+  let cur = -1, timer = null, dragging = false;
+
+  function show(i) {
+    cur = (i + ROBOTS.length) % ROBOTS.length;
+    const r = ROBOTS[cur];
+    [...dots.children].forEach((d, k) => d.classList.toggle("active", k === cur));
+    nameEl.textContent = r.name; noteEl.textContent = r.note;
+    badge.href = r.game.url;
+    badge.querySelector(".game-logo").innerHTML = r.game.logo
+      ? `<img src="${r.game.logo}" alt="${r.game.name} logo">`
+      : `<span class="game-name">${r.game.name}</span><span class="game-season">${r.game.season}</span>`;
+    badge.setAttribute("aria-label", `Watch the ${r.game.name} (${r.game.season}) game reveal`);
+    if (!cache.has(r.src)) { status.hidden = false; status.textContent = "Loading model…"; }
+    canvas.classList.add("fading");
+    Promise.all([load(r.src), new Promise((ok) => setTimeout(ok, 250))]).then(([root]) => {
+      if (ROBOTS[cur] !== r) return;
+      pivot.clear(); pivot.add(root); frame(root);
+      status.hidden = true; canvas.classList.remove("fading");
+      const next = ROBOTS[(cur + 1) % ROBOTS.length]; load(next.src); // preload the next one
+    }).catch((e) => { console.error(e); status.hidden = false; status.textContent = "Model failed to load."; });
+    schedule();
+  }
+  function schedule() {
+    clearTimeout(timer);
+    if (ROBOTS.length > 1 && !dragging && !reduced) timer = setTimeout(() => show(cur + 1), CYCLE_MS);
+  }
+  // Only pause the rotation between robots while someone is actually dragging the model.
+  controls.addEventListener("start", () => { dragging = true; clearTimeout(timer); });
+  controls.addEventListener("end", () => { dragging = false; schedule(); });
+  [...dots.children].forEach((d, k) => d.onclick = () => show(k));
+
+  function frame(root) {
+    const r = root.userData.radius;
+    camera.position.copy(new THREE.Vector3(1, 0.6, 1).normalize().multiplyScalar(r / Math.sin(THREE.MathUtils.degToRad(camera.fov / 2)) * 1.05));
+    camera.near = r / 50; camera.far = r * 20; camera.updateProjectionMatrix();
+    controls.target.set(0, 0, 0); controls.update();
+  }
+  function prepare(root) {
+    root.rotation.x = -Math.PI / 2; // Onshape is Z-up, three.js is Y-up
+    root.updateMatrixWorld(true);
+    root.traverse((o) => {
+      if (!o.isMesh) return;
+      if (o.material.name === "polycarbonate") {
+        // Clear polycarbonate hopper walls: see-through, slight blue tint, glossy.
+        o.material = new THREE.MeshPhysicalMaterial({ color: 0xcfe6f7, transparent: true, opacity: 0.22, roughness: 0.08, metalness: 0, side: THREE.DoubleSide, depthWrite: false });
+        o.renderOrder = 2;
+      } else { o.material.metalness = 0.35; o.material.roughness = 0.5; }
+    });
+    const box = new THREE.Box3().setFromObject(root);
+    root.position.sub(box.getCenter(new THREE.Vector3()));
+    root.userData.radius = box.getSize(new THREE.Vector3()).length() / 2;
+    return root;
+  }
+
+  show(0);
   function resize() {
     const w = canvas.clientWidth, h = canvas.clientHeight;
     if (canvas.width !== Math.round(w * renderer.getPixelRatio())) { renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
