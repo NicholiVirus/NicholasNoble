@@ -9,8 +9,8 @@ window.PROJECTS = [
   { img: "02", title: "NASA Goddard: Mobile Robot Simulation", year: 2026, tags: ["software","robotics"], featured: true, image: "",
     blurb: "Paid intern, National Space Club Scholars Program. Built a simulation environment for training mobile robots with reinforcement learning.",
     desc: "Project: Simulation Environment for Mobile Robots. Over 6 weeks I worked on kinematic and dynamic analysis of mobile robots, focused on autonomous path planning and control with reinforcement learning (Python, MATLAB, C++). We met the project goal: a reliable simulation environment with physical robot models that makes RL algorithm development faster and more realistic." },
-  { img: "03", title: "FRC 2026 REBUILT Robot", year: 2026, tags: ["robotics","cad","fabrication"], featured: true, image: "",
-    blurb: "Saxon Robotics. Designed in Onshape on Team 526 (Alliance 8 captain at FCH Alexandria), then rebuilt for WV ROCKS with Team 611.",
+  { img: "03", title: "FRC 2026 REBUILT Robot", year: 2026, tags: ["robotics","cad","fabrication"], featured: true, image: "assets/photos/wvrox-robot.jpg",
+    blurb: "Saxon Robotics. Designed in Onshape on Team 526 (Alliance 8 captain at FCH Alexandria), then rebuilt with Team 611: 16th of 30 at WV ROCKS.",
     desc: "As co-leader of Team 526's mechanical and construction team (Saxon Robotics B team), I led the design of our 2026 FIRST Robotics competition robot and managed building and testing. I lead a mechanical and construction team of 10 freshmen and sophomores." },
   { img: "04", title: "Bunnybots 2025: 12th Place", year: 2025, tags: ["robotics","fabrication"], featured: true, image: "",
     blurb: "My first build season with Saxon Robotics Team 526. We placed 12th at Blair Bunnybots 2025.",
@@ -36,7 +36,7 @@ window.PROJECTS = [
   { img: "14", title: "LEGO Battlebots", year: 2022, tags: ["robotics","fabrication"], featured: false, image: "",
     blurb: "Built LEGO Technic combat robots for head-to-head matches (2022–2023).",
     desc: "Competed in LEGO Battlebots from 2022 to 2023, designing and building combat robots out of LEGO Technic for head-to-head matches." },
-  { img: "16", title: "Harvest Havoc Strategy Simulator", year: 2026, tags: ["software","robotics"], featured: true, image: "",
+  { img: "16", title: "Harvest Havoc Strategy Simulator", year: 2026, tags: ["software","robotics"], featured: true, image: "assets/photos/sim.webp",
     blurb: "A browser-based, multiplayer 3D simulator of Bunnybots 2026 that I built to test strategy and robot designs.",
     desc: "Harvest Havoc Sim recreates Blair Bunnybots 2026 from the official field CAD and game manual: swerve driving, AI opponents, scoring, fouls and ranking points. You can configure each robot's mechanisms (ground, depot and ramp intakes, elevator height, passthrough or hopper layouts) to compare designs before building. Play it at toungesimbunnybots.onrender.com. Code: github.com/NicholiVirus/TongueSimBunnybots", link: "https://toungesimbunnybots.onrender.com/" },
   // ---- CAD slots: send CAD screenshots/renders for these numbers ----
@@ -51,12 +51,13 @@ window.PROJECTS = [
 // ===== EVENT PHOTO SLIDESHOW =====
 // Photos crossfade slowly. Save files as assets/photos/P1.jpg ... and set src. Leave src "" for a numbered placeholder.
 window.GALLERY = [
-  { slot: "P1", src: "", caption: "Blair Bunnybots 2025 · Team 526" },
-  { slot: "P2", src: "", caption: "FCH District Alexandria 2026 · Team 526" },
-  { slot: "P3", src: "", caption: "FCH District Alexandria 2026 · in the pits" },
-  { slot: "P4", src: "", caption: "WV ROCKS 2026 · Team 611" },
-  { slot: "P5", src: "", caption: "WV ROCKS 2026 · on the field" },
+  { slot: "P1", src: "assets/photos/wvrox-robot.jpg", caption: "WV ROCKS 2026 · our robot on the field as Team 611" },
+  { slot: "P2", src: "assets/photos/wvrox-team.jpg", caption: "WV ROCKS 2026 · Team 611" },
+  { slot: "P3", src: "assets/photos/wvrox-field.jpg", caption: "WV ROCKS 2026 · the field" },
+  { slot: "P4", src: "assets/photos/wvrox-pit.jpg", caption: "WV ROCKS 2026 · pit repairs" },
+  { slot: "P5", src: "assets/photos/wvrox-drivers.jpg", caption: "WV ROCKS 2026 · driver station" },
+  { slot: "P6", src: "assets/photos/wvrox-alliance.jpg", caption: "WV ROCKS 2026 · playoff alliance" },
 ];
-window.PHOTO_CREDIT = "Event photos: robotphoto.smugmug.com";
+window.PHOTO_CREDIT = "Photos: Saxon Robotics media team";
 
 

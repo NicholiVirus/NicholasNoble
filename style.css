@@ -121,7 +121,7 @@ footer{text-align:center;padding:36px;color:var(--muted);font-size:.85rem;border
 .facts{list-style:none;display:flex;gap:40px;flex-wrap:wrap;margin:16px 0}
 .facts strong{display:block;font-family:var(--serif);font-size:1.6rem;font-weight:600}
 .facts span{color:var(--muted);font-size:.85rem}
-.story-img{aspect-ratio:16/9;max-width:560px;margin-top:14px;border:1px solid var(--line);border-radius:var(--r)}
+.story-img{display:block;width:100%;object-fit:cover;aspect-ratio:16/9;max-width:560px;margin-top:14px;border:1px solid var(--line);border-radius:var(--r)}
 @media(max-width:800px){.story>li{grid-template-columns:1fr;gap:6px}}
 /* event photos */
 .gallery{margin:0}
@@ -137,3 +137,4 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:16px;fl
 .foot-links a:hover{color:var(--text)}
 @media(prefers-reduced-motion:reduce){.g-frame{transition:none}}
 .sim-note{font-size:.82rem;margin-top:8px}
+.story-img.ph{display:flex}
