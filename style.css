@@ -103,6 +103,7 @@ footer{text-align:center;padding:36px;color:var(--muted);font-size:.85rem;border
 .cad-dots{display:flex;gap:6px;margin-top:8px}
 .cad-dots button{width:22px;height:3px;border:0;padding:0;background:var(--line);cursor:pointer}
 .cad-dots button.active{background:var(--text)}
+.game-badge[hidden]{display:none}
 .game-badge{display:flex;flex-direction:column;align-items:flex-end;gap:4px;text-align:right;flex-shrink:0}
 .game-kicker{font-size:.72rem;color:var(--muted);letter-spacing:.04em}
 .game-logo{display:flex;flex-direction:column;align-items:flex-end;border:1px solid var(--line);border-radius:var(--r);padding:6px 12px;background:var(--card);transition:border-color .2s}

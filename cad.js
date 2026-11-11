@@ -20,6 +20,7 @@ const ROBOTS = [
   { name: "First robot", note: "Team 526 · my first full robot CAD", src: "assets/cad/robot-v1.json", game: GAMES.rebuilt },
   { name: "Rebuilt robot", note: "Team 611 · rebuilt for WV ROCKS", src: "assets/cad/robot-v2.json", game: GAMES.rebuilt },
   { name: "Bunnybots 2026 robot", note: "Team 611 · in progress", src: "", game: GAMES.havoc },
+  { name: "Robot dog", note: "Independent project · quadruped, in progress", src: "assets/cad/robot-dog.json", game: null },
 ];
 const CYCLE_MS = 8000;
 
@@ -64,11 +65,14 @@ function mount(el) {
     const r = ROBOTS[cur];
     [...dots.children].forEach((d, k) => d.classList.toggle("active", k === cur));
     nameEl.textContent = r.name; noteEl.textContent = r.note;
+    badge.hidden = !r.game;
+    if (r.game) {
     badge.href = r.game.url;
     badge.querySelector(".game-logo").innerHTML = r.game.logo
       ? `<img src="${r.game.logo}" alt="${r.game.name} logo">`
       : `<span class="game-name">${r.game.name}</span><span class="game-season">${r.game.season}</span>`;
     badge.setAttribute("aria-label", `Watch the ${r.game.name} (${r.game.season}) game reveal`);
+    }
     canvas.classList.add("fading");
     if (!r.src) { // no CAD yet: placeholder card
       setTimeout(() => { if (ROBOTS[cur] !== r) return; pivot.clear(); status.hidden = false; status.textContent = "CAD coming soon"; }, 250);
