@@ -15,6 +15,7 @@
     <nav>
       <a href="#featured">Featured</a>
       <a href="#robots">Saxon Robotics</a>
+      <a href="#photos">Photos</a>
       <a href="#projects">Projects</a>
       <a href="#about">About</a>
       <a href="#resume">Resume</a>
@@ -121,6 +122,21 @@
       </ol>
     </section>
 
+    <!-- EVENT PHOTOS -->
+    <section id="photos" class="section">
+      <div class="section-head"><h2>At Competition</h2></div>
+      <figure class="gallery" id="gallery" aria-roledescription="slideshow">
+        <div class="gallery-frames" id="gallery-frames"></div>
+        <figcaption><span id="gallery-cap"></span><span class="gallery-credit" id="gallery-credit"></span></figcaption>
+      </figure>
+    </section>
+
+    <!-- VIDEOS -->
+    <section id="videos" class="section">
+      <div class="section-head"><h2>Videos</h2><p class="muted-note">Muted previews. Click to watch on YouTube.</p></div>
+      <div class="videos" id="videos-grid"></div>
+    </section>
+
     <!-- PAST PROJECTS -->
     <section id="projects" class="section">
       <div class="section-head">
@@ -196,7 +212,14 @@
     </section>
   </main>
 
-  <footer>© <span id="yr"></span> Nicholas Noble · McLean, VA</footer>
+  <footer>
+    <span>© <span id="yr"></span> Nicholas Noble · McLean, VA</span>
+    <nav class="foot-links">
+      <a id="yt-link" href="#" target="_blank" rel="noopener" hidden>YouTube</a>
+      <a href="https://www.linkedin.com/in/nicholas-noble-38aa67324" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/NicholiVirus" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </footer>
 
   <!-- Project modal -->
   <div class="modal" id="modal" hidden>

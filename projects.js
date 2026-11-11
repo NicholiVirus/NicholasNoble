@@ -47,3 +47,25 @@ window.PROJECTS = [
   { img: "11", title: "CAD Design (coming soon)", year: 2026, tags: ["cad"], featured: false, image: "",
     blurb: "Placeholder for a CAD model.", desc: "Details coming soon." },
 ];
+
+// ===== EVENT PHOTO SLIDESHOW =====
+// Photos crossfade slowly. Save files as assets/photos/P1.jpg ... and set src. Leave src "" for a numbered placeholder.
+window.GALLERY = [
+  { slot: "P1", src: "", caption: "Blair Bunnybots 2025 · Team 526" },
+  { slot: "P2", src: "", caption: "FCH District Alexandria 2026 · Team 526" },
+  { slot: "P3", src: "", caption: "FCH District Alexandria 2026 · in the pits" },
+  { slot: "P4", src: "", caption: "WV ROCKS 2026 · Team 611" },
+  { slot: "P5", src: "", caption: "WV ROCKS 2026 · on the field" },
+];
+window.PHOTO_CREDIT = "Event photos: robotphoto.smugmug.com";
+
+// ===== VIDEOS (always muted) =====
+// youtube: the video ID, the part after "watch?v=" (e.g. "dQw4w9WgXcQ"). Leave "" for a placeholder.
+window.VIDEOS = [
+  { slot: "V1", youtube: "", title: "Outreach", note: "FIRST LEGO League mentoring & community events" },
+  { slot: "V2", youtube: "", title: "NYU autonomous vehicle", note: "Path following and obstacle avoidance" },
+  { slot: "V3", youtube: "", title: "Robot dog", note: "Quadruped gait testing" },
+];
+
+// ===== LINKS =====
+window.LINKS = { youtube: "" }; // your channel URL, e.g. "https://www.youtube.com/@yourhandle"
