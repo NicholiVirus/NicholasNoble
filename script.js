@@ -88,19 +88,3 @@ document.getElementById("yr").textContent = new Date().getFullYear();
   if (!still && els.length > 1) setInterval(() => { i = (i + 1) % els.length; show(i); }, 6000);
 })();
 
-// Videos: muted, looping previews with no controls, so they can never play sound here.
-(() => {
-  const V = window.VIDEOS || [], grid = document.getElementById("videos-grid");
-  if (!grid) return;
-  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  grid.innerHTML = V.map((v) => {
-    const media = !v.youtube ? `<div class="v-media ph">Video ${v.slot}</div>`
-      : still ? `<div class="v-media" style="background-image:url('https://i.ytimg.com/vi/${v.youtube}/hqdefault.jpg')"></div>`
-      : `<div class="v-media"><iframe src="https://www.youtube-nocookie.com/embed/${v.youtube}?autoplay=1&mute=1&loop=1&playlist=${v.youtube}&controls=0&disablekb=1&playsinline=1&modestbranding=1&rel=0" title="${v.title} (muted)" allow="autoplay; encrypted-media" tabindex="-1" loading="lazy"></iframe></div>`;
-    const href = v.youtube ? `https://www.youtube.com/watch?v=${v.youtube}` : null;
-    return `<${href ? `a href="${href}" target="_blank" rel="noopener"` : "div"} class="video">${media}
-      <div class="v-body"><h3>${v.title}</h3><p>${v.note}</p></div></${href ? "a" : "div"}>`;
-  }).join("");
-  const yt = document.getElementById("yt-link"), url = (window.LINKS || {}).youtube;
-  if (yt && url) { yt.href = url; yt.hidden = false; }
-})();

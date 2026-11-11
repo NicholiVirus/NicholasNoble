@@ -59,13 +59,4 @@ window.GALLERY = [
 ];
 window.PHOTO_CREDIT = "Event photos: robotphoto.smugmug.com";
 
-// ===== VIDEOS (always muted) =====
-// youtube: the video ID, the part after "watch?v=" (e.g. "dQw4w9WgXcQ"). Leave "" for a placeholder.
-window.VIDEOS = [
-  { slot: "V1", youtube: "", title: "Outreach", note: "FIRST LEGO League mentoring & community events" },
-  { slot: "V2", youtube: "", title: "NYU autonomous vehicle", note: "Path following and obstacle avoidance" },
-  { slot: "V3", youtube: "", title: "Robot dog", note: "Quadruped gait testing" },
-];
 
-// ===== LINKS =====
-window.LINKS = { youtube: "" }; // your channel URL, e.g. "https://www.youtube.com/@yourhandle"
