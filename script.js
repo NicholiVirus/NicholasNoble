@@ -72,19 +72,22 @@ document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeM(); });
 document.querySelectorAll("[data-count]").forEach(el=>el.textContent=el.dataset.count);
 document.getElementById("yr").textContent = new Date().getFullYear();
 
-// Event photo slideshow: slow crossfade with a gentle zoom.
+// Per-event photo loops: slow crossfade with a gentle zoom, each loop offset so they don't change together.
 (() => {
-  const G = window.GALLERY || [], frames = document.getElementById("gallery-frames");
-  if (!frames || !G.length) return;
-  frames.innerHTML = G.map((p) => p.src
-    ? `<div class="g-frame" style="background-image:url('${p.src}')" role="img" aria-label="${p.caption}"></div>`
-    : `<div class="g-frame ph">Photo ${p.slot}</div>`).join("");
-  document.getElementById("gallery-credit").textContent = window.PHOTO_CREDIT || "";
-  const cap = document.getElementById("gallery-cap"), els = [...frames.children];
+  const sets = window.EVENT_PHOTOS || {};
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let i = 0;
-  const show = (n) => { els.forEach((e, k) => e.classList.toggle("on", k === n)); cap.textContent = G[n].caption; };
-  show(0);
-  if (!still && els.length > 1) setInterval(() => { i = (i + 1) % els.length; show(i); }, 6000);
+  document.querySelectorAll(".loop[data-set]").forEach((fig, n) => {
+    const photos = sets[fig.dataset.set] || [];
+    if (!photos.length) return;
+    const frames = document.createElement("div");
+    frames.className = "loop-frames";
+    frames.innerHTML = photos.map((p) => `<div class="g-frame" style="background-image:url('${p.src}')" role="img" aria-label="${p.caption}"></div>`).join("");
+    const cap = document.createElement("span"); cap.className = "loop-cap";
+    fig.prepend(frames); fig.querySelector("figcaption").append(cap);
+    const els = [...frames.children]; let i = 0;
+    const show = (k) => { els.forEach((e, j) => e.classList.toggle("on", j === k)); cap.textContent = " · " + photos[k].caption; };
+    show(0);
+    if (!still && els.length > 1) setTimeout(() => setInterval(() => { i = (i + 1) % els.length; show(i); }, 5500), n * 1800);
+  });
 })();
 

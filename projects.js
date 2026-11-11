@@ -48,17 +48,29 @@ window.PROJECTS = [
     blurb: "Placeholder for a CAD model.", desc: "Details coming soon." },
 ];
 
-// ===== EVENT PHOTO SLIDESHOW =====
-// Photos crossfade slowly. Save files as assets/photos/P1.jpg ... and set src. Leave src "" for a numbered placeholder.
-window.GALLERY = [
-  { slot: "P0", src: "assets/photos/robot-hero.jpg", caption: "Our REBUILT robot, hopper full, ready for WV ROCKS" },
-  { slot: "P1", src: "assets/photos/wvrox-robot.jpg", caption: "WV ROCKS 2026 · our robot on the field as Team 611" },
-  { slot: "P2", src: "assets/photos/wvrox-team.jpg", caption: "WV ROCKS 2026 · Team 611" },
-  { slot: "P3", src: "assets/photos/wvrox-field.jpg", caption: "WV ROCKS 2026 · the field" },
-  { slot: "P4", src: "assets/photos/wvrox-pit.jpg", caption: "WV ROCKS 2026 · pit repairs" },
-  { slot: "P5", src: "assets/photos/wvrox-drivers.jpg", caption: "WV ROCKS 2026 · driver station" },
-  { slot: "P6", src: "assets/photos/wvrox-alliance.jpg", caption: "WV ROCKS 2026 · playoff alliance" },
-];
-window.PHOTO_CREDIT = "Photos: Saxon Robotics media team";
+// ===== EVENT PHOTO LOOPS (one per event in the Saxon Robotics story) =====
+window.EVENT_PHOTOS = {
+  alexandria: [
+    { src: "assets/photos/alex-1.jpg", caption: "526 at the hub" },
+    { src: "assets/photos/alex-2.jpg", caption: "526 in a qualification match" },
+    { src: "assets/photos/alex-3.jpg", caption: "526 collecting fuel" },
+    { src: "assets/photos/alex-4.jpg", caption: "Setting up 526 before a match" },
+    { src: "assets/photos/alex-5.jpg", caption: "Final checks on the field" },
+  ],
+  chesapeake: [
+    { src: "assets/photos/ches-1.jpg", caption: "526 on the field" },
+    { src: "assets/photos/ches-2.jpg", caption: "526 lining up" },
+    { src: "assets/photos/ches-3.jpg", caption: "526 drive team" },
+    { src: "assets/photos/ches-4.jpg", caption: "Match in progress" },
+  ],
+  wvrocks: [
+    { src: "assets/photos/robot-hero.jpg", caption: "Our rebuilt robot, hopper full" },
+    { src: "assets/photos/wvrox-robot.jpg", caption: "611 on the field" },
+    { src: "assets/photos/wvrox-field.jpg", caption: "The WV ROCKS field" },
+    { src: "assets/photos/wvrox-pit.jpg", caption: "Pit repairs" },
+    { src: "assets/photos/wvrox-alliance.jpg", caption: "Playoff alliance" },
+  ],
+};
+
 
 
