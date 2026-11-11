@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nicholas — Maker & Engineer</title>
+  <meta name="description" content="Portfolio of Nicholas: hardware, CAD, fabrication, and engineering projects.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="nav">
+    <a href="#top" class="logo">NN<span>.</span></a>
+    <nav>
+      <a href="#featured">Featured</a>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#resume">Resume</a>
+      <a href="#contact" class="btn btn-sm">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <p class="eyebrow mono">// maker · engineer · builder</p>
+      <h1>Hi, I'm <span class="accent">Nicholas</span>.<br>I design and build things that work.</h1>
+      <p class="lead">From CAD to the workbench: mechanical design, electronics, 3D printing and fabrication. Here's what I've made.</p>
+      <div class="hero-cta">
+        <a href="#featured" class="btn">See my work</a>
+        <a href="resume.pdf" class="btn btn-ghost" target="_blank">Download resume</a>
+      </div>
+      <ul class="stats">
+        <li><strong data-count="12">0</strong><span>Projects built</span></li>
+        <li><strong data-count="5">0</strong><span>Tools mastered</span></li>
+        <li><strong data-count="1000">0</strong><span>Hours in the shop</span></li>
+      </ul>
+    </section>
+
+    <!-- FEATURED CAROUSEL -->
+    <section id="featured" class="section">
+      <div class="section-head">
+        <h2>Featured Projects</h2>
+        <div class="car-controls">
+          <button class="car-btn" id="prev" aria-label="Previous">&#8592;</button>
+          <button class="car-btn" id="next" aria-label="Next">&#8594;</button>
+        </div>
+      </div>
+      <div class="carousel" id="carousel">
+        <div class="track" id="track"></div>
+      </div>
+      <div class="dots" id="dots"></div>
+    </section>
+
+    <!-- PAST PROJECTS -->
+    <section id="projects" class="section">
+      <div class="section-head">
+        <h2>Past Projects</h2>
+        <div class="filters" id="filters">
+          <button class="chip active" data-f="all">All</button>
+          <button class="chip" data-f="cad">CAD</button>
+          <button class="chip" data-f="electronics">Electronics</button>
+          <button class="chip" data-f="fabrication">Fabrication</button>
+          <button class="chip" data-f="software">Software</button>
+        </div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section about">
+      <div>
+        <h2>About Me</h2>
+        <p>I'm a hands-on maker who loves turning ideas into physical products. I iterate fast: sketch, model, prototype, test, repeat.</p>
+        <p>I care about clean design, documented process, and builds that survive real-world use.</p>
+      </div>
+      <div class="skills">
+        <h3 class="mono">toolkit</h3>
+        <div class="tags">
+          <span>Onshape</span><span>Fusion 360</span><span>SolidWorks</span><span>3D Printing</span>
+          <span>Laser Cutting</span><span>CNC</span><span>Arduino</span><span>Soldering</span>
+          <span>PCB Design</span><span>Python</span><span>C++</span><span>Prototyping</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUME -->
+    <section id="resume" class="section">
+      <h2>Experience</h2>
+      <ol class="timeline">
+        <li><span class="mono date">2025 — Now</span><h3>Role Title · Organization</h3><p>Resume details coming soon.</p></li>
+        <li><span class="mono date">2024</span><h3>Role Title · Organization</h3><p>Resume details coming soon.</p></li>
+      </ol>
+      <a href="resume.pdf" class="btn" target="_blank">Full resume (PDF)</a>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section contact">
+      <h2>Let's build something.</h2>
+      <p class="lead">Open to internships, collaborations, and freelance builds.</p>
+      <div class="hero-cta">
+        <a href="mailto:you@example.com" class="btn">Email me</a>
+        <a href="https://github.com/NicholiVirus" class="btn btn-ghost" target="_blank">GitHub</a>
+        <a href="https://linkedin.com" class="btn btn-ghost" target="_blank">LinkedIn</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>© <span id="yr"></span> Nicholas · Built by hand.</footer>
+
+  <!-- Project modal -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal-card">
+      <button class="close" id="close" aria-label="Close">×</button>
+      <div class="modal-img" id="m-img"></div>
+      <div class="modal-body">
+        <p class="mono eyebrow" id="m-tags"></p>
+        <h3 id="m-title"></h3>
+        <p id="m-desc"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="projects.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
