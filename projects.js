@@ -55,20 +55,16 @@ window.EVENT_PHOTOS = {
     { src: "assets/photos/alex-2.jpg", caption: "526 in a qualification match" },
     { src: "assets/photos/alex-3.jpg", caption: "526 collecting fuel" },
     { src: "assets/photos/alex-4.jpg", caption: "Setting up 526 before a match" },
-    { src: "assets/photos/alex-5.jpg", caption: "Final checks on the field" },
   ],
   chesapeake: [
     { src: "assets/photos/ches-1.jpg", caption: "526 on the field" },
     { src: "assets/photos/ches-2.jpg", caption: "526 lining up" },
-    { src: "assets/photos/ches-3.jpg", caption: "526 drive team" },
     { src: "assets/photos/ches-4.jpg", caption: "Match in progress" },
   ],
   wvrocks: [
     { src: "assets/photos/robot-hero.jpg", caption: "Our rebuilt robot, hopper full" },
     { src: "assets/photos/wvrox-robot.jpg", caption: "611 on the field" },
     { src: "assets/photos/wvrox-field.jpg", caption: "The WV ROCKS field" },
-    { src: "assets/photos/wvrox-pit.jpg", caption: "Pit repairs" },
-    { src: "assets/photos/wvrox-alliance.jpg", caption: "Playoff alliance" },
   ],
 };
 
