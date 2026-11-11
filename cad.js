@@ -9,14 +9,18 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 const GAMES = {
   rebuilt: { name: "REBUILT", season: "FRC 2026", logo: "",
     url: "https://www.youtube.com/results?search_query=2026+FIRST+Robotics+Competition+REBUILT+Game+Animation" },
+  bunny25: { name: "Bunnybots", season: "2025", logo: "",
+    url: "https://robot.mbhs.edu/bunnybots/bunnybots-2025" },
   havoc: { name: "Harvest Havoc", season: "Bunnybots 2026", logo: "",
-    url: "https://www.youtube.com/results?search_query=Blair+Bunnybots+2026+Harvest+Havoc+game+reveal" },
+    url: "https://robot.mbhs.edu/bunnybots" },
 };
+// Chronological. Robots without a model yet show a "CAD coming soon" card in the rotation.
 const ROBOTS = [
-  { name: "First robot", note: "My first full robot CAD", src: "assets/cad/robot-v1.json", game: GAMES.rebuilt },
-  { name: "Rebuilt robot", note: "Rebuilt for WV ROCKS", src: "assets/cad/robot-v2.json", game: GAMES.rebuilt },
-  { name: "Bunnybots robot", note: "In progress", src: "", game: GAMES.havoc },
-].filter((r) => r.src);
+  { name: "Bunnybots 2025 robot", note: "Team 526 · placed 12th", src: "", game: GAMES.bunny25 },
+  { name: "First robot", note: "Team 526 · my first full robot CAD", src: "assets/cad/robot-v1.json", game: GAMES.rebuilt },
+  { name: "Rebuilt robot", note: "Team 611 · rebuilt for WV ROCKS", src: "assets/cad/robot-v2.json", game: GAMES.rebuilt },
+  { name: "Bunnybots 2026 robot", note: "Team 611 · in progress", src: "", game: GAMES.havoc },
+];
 const CYCLE_MS = 8000;
 
 for (const el of document.querySelectorAll("[data-cad]")) mount(el);
@@ -65,13 +69,17 @@ function mount(el) {
       ? `<img src="${r.game.logo}" alt="${r.game.name} logo">`
       : `<span class="game-name">${r.game.name}</span><span class="game-season">${r.game.season}</span>`;
     badge.setAttribute("aria-label", `Watch the ${r.game.name} (${r.game.season}) game reveal`);
-    if (!cache.has(r.src)) { status.hidden = false; status.textContent = "Loading model…"; }
     canvas.classList.add("fading");
+    if (!r.src) { // no CAD yet: placeholder card
+      setTimeout(() => { if (ROBOTS[cur] !== r) return; pivot.clear(); status.hidden = false; status.textContent = "CAD coming soon"; }, 250);
+      return schedule();
+    }
+    if (!cache.has(r.src)) { status.hidden = false; status.textContent = "Loading model…"; }
     Promise.all([load(r.src), new Promise((ok) => setTimeout(ok, 250))]).then(([root]) => {
       if (ROBOTS[cur] !== r) return;
       pivot.clear(); pivot.add(root); frame(root);
       status.hidden = true; canvas.classList.remove("fading");
-      const next = ROBOTS[(cur + 1) % ROBOTS.length]; load(next.src); // preload the next one
+      const next = ROBOTS.slice(cur + 1).concat(ROBOTS).find((x) => x.src); if (next) load(next.src); // preload the next model
     }).catch((e) => { console.error(e); status.hidden = false; status.textContent = "Model failed to load."; });
     schedule();
   }
@@ -107,7 +115,7 @@ function mount(el) {
     return root;
   }
 
-  show(0);
+  show(Math.max(0, ROBOTS.findIndex((r) => r.src))); // start on a real model
   function resize() {
     const w = canvas.clientWidth, h = canvas.clientHeight;
     if (canvas.width !== Math.round(w * renderer.getPixelRatio())) { renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
