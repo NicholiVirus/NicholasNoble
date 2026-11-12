@@ -57,6 +57,8 @@ document.addEventListener("click", e=>{
   const el = e.target.closest("[data-i]"); if(!el) return;
   const p = P[el.dataset.i], m = document.getElementById("m-img");
   m.className = p.image ? "modal-img" : "modal-img ph"; m.style.backgroundImage = p.image?`url('${p.image}')`:""; m.textContent = phText(p);
+  m.querySelector("video")?.remove();
+  if (p.video) { const v = document.createElement("video"); Object.assign(v, { src: p.video, poster: p.image, muted: true, autoplay: true, loop: true, playsInline: true, controls: true }); v.className = "m-video"; m.style.backgroundImage = ""; m.textContent = ""; m.append(v); }
   const g = p.gallery || [], nav = document.getElementById("m-gal");
   nav.hidden = g.length < 2; let gi = 0;
   const showG = () => { m.style.backgroundImage = `url('${g[gi]}')`; nav.querySelector("span").textContent = `${gi + 1} / ${g.length}`; };

@@ -27,7 +27,7 @@ window.PROJECTS = [
   { img: "08", title: "Gracious Professionalism → Saxon Sparks", year: 2025, tags: ["leadership","robotics"], featured: false, image: "",
     blurb: "Helping rival teams at competitions earned two Gracious Professionalism awards and laid the base for Langley's B team, Saxon Sparks (526).",
     desc: "I helped opposing teams repair and tune their robots at FIRST Robotics competitions, earning the Gracious Professionalism award at both Regional and District events (3/2025). Those efforts directly provided the base for Langley Robotics to start a B team, Saxon Sparks (526)." },
-  { img: "12", title: "Adaptive Basketball Catapult", year: 2024, tags: ["cad","fabrication","leadership"], featured: true, image: "",
+  { img: "12", title: "Adaptive Basketball Catapult", year: 2024, tags: ["cad","fabrication","leadership"], featured: true, image: "assets/photos/catapult.jpg", video: "assets/video/catapult.mp4",
     blurb: "A catapult I built in 8th grade so a student with a disability could play basketball at school.",
     desc: "In 2024, during 8th grade, I designed and built a catapult for my school so a student with a disability could shoot baskets and play alongside classmates. The build had to be safe, easy to operate, and adjustable for distance and arc." },
   { img: "13", title: "VEX Robotics Season", year: 2023, tags: ["robotics"], featured: false, image: "",

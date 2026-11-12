@@ -153,3 +153,6 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:16px;fl
 .m-gal{display:flex;align-items:center;justify-content:center;gap:12px;padding:10px 0 0;color:var(--muted);font-size:.85rem}
 .m-gal[hidden]{display:none}
 #m-link[hidden]{display:none}
+.modal-img{position:relative}
+.m-video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
+video.story-img{background:#000}
