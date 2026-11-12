@@ -3,7 +3,7 @@
 // save as assets/projects/<number>.jpg (e.g. 01.jpg) and set image: "assets/projects/01.jpg".
 // featured: true = shows in the top carousel.
 window.PROJECTS = [
-  { img: "01", title: "Autonomous Quadruped Robot", year: 2026, tags: ["robotics","cad","software"], featured: true, image: "",
+  { img: "01", title: "Autonomous Quadruped Robot", year: 2026, tags: ["robotics","cad","software"], featured: true, image: "assets/photos/robot-dog.jpg",
     blurb: "A 60 cm tall, fully autonomous four-legged robot built to cross rough terrain at 5 mph and avoid obstacles.",
     desc: "My current independent project. I'm designing the legs, joints and frame in CAD, fabricating parts with 3D printing and CNC, and writing autonomy software for gait control, terrain handling and obstacle avoidance. Target: 60 cm tall, 5 mph over uneven ground." },
   { img: "02", title: "NASA Goddard: CORTEx", year: 2026, tags: ["software","robotics"], featured: true, image: "assets/photos/cortex-poster.jpg",
