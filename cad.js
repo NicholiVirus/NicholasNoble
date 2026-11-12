@@ -108,7 +108,7 @@ function mount(el) {
     sph.setFromVector3(camera.position);
     const dp = homePolar - sph.phi, dr = homeDist - sph.radius;
     if (Math.abs(dp) < 1e-4 && Math.abs(dr) < 1e-4) return;
-    sph.phi += dp * 0.06; sph.radius += dr * 0.06;
+    sph.phi += dp * 0.012; sph.radius += dr * 0.012;
     camera.position.setFromSpherical(sph);
   }
   [...dots.children].forEach((d, k) => d.onclick = () => show(k));
