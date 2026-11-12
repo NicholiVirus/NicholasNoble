@@ -19,7 +19,7 @@ const ROBOTS = [
   { name: "Bunnybots 2025 robot", note: "Team 526 · placed 12th", src: "", game: GAMES.bunny25 },
   { name: "First robot", note: "Team 526 · my first full robot CAD", src: "assets/cad/robot-v1.json", game: GAMES.rebuilt },
   { name: "Rebuilt robot", note: "Team 611 · rebuilt for WV ROCKS, 16th of 30", src: "assets/cad/robot-v2.json", game: GAMES.rebuilt },
-  { name: "Bunnybots 2026 robot", note: "Team 611 · I lead CAD & fabrication · simplified model, in progress", src: "assets/cad/robot-bb26.json", game: GAMES.havoc },
+  { name: "Bunnybots 2026 robot", note: "Team 611 · I lead CAD & fabrication · in progress", src: "", game: GAMES.havoc },
   { name: "Robot dog", note: "Independent project · quadruped, in progress", src: "assets/cad/robot-dog.json", game: null },
 ];
 const CYCLE_MS = 8000;
