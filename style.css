@@ -156,3 +156,4 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:16px;fl
 .modal-img{position:relative}
 .m-video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
 video.story-img{background:#000}
+.card video.hover-play{width:100%;height:100%;object-fit:cover;display:block}

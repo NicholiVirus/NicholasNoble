@@ -38,7 +38,7 @@ const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.ta
 function render(f){
   grid.innerHTML = P.filter(p=>f==="all"||p.tags.includes(f)).sort((a,b)=>b.year-a.year).map(p=>`
     <article class="card" data-i="${P.indexOf(p)}">
-      <div class="${imgClass(p)}" ${imgStyle(p)}>${phText(p)}</div>
+      ${p.video ? `<div class="img"><video class="hover-play" src="${p.video}" poster="${p.image}" muted loop playsinline preload="none"></video></div>` : `<div class="${imgClass(p)}" ${imgStyle(p)}>${phText(p)}</div>`}
       <div class="body"><span class="tag-line">${p.year} · ${p.tags.join(", ")}</span>
       <h3>${p.title}</h3><p>${p.blurb}</p></div>
     </article>`).join("");
@@ -58,7 +58,7 @@ document.addEventListener("click", e=>{
   const p = P[el.dataset.i], m = document.getElementById("m-img");
   m.className = p.image ? "modal-img" : "modal-img ph"; m.style.backgroundImage = p.image?`url('${p.image}')`:""; m.textContent = phText(p);
   m.querySelector("video")?.remove();
-  if (p.video) { const v = document.createElement("video"); Object.assign(v, { src: p.video, poster: p.image, muted: true, autoplay: true, loop: true, playsInline: true, controls: true }); v.className = "m-video"; m.style.backgroundImage = ""; m.textContent = ""; m.append(v); }
+  if (p.video) { const v = document.createElement("video"); Object.assign(v, { src: p.video, poster: p.image, muted: true, loop: true, playsInline: true, controls: true }); v.className = "m-video hover-play"; m.style.backgroundImage = ""; m.textContent = ""; m.append(v); }
   const g = p.gallery || [], nav = document.getElementById("m-gal");
   nav.hidden = g.length < 2; let gi = 0;
   const showG = () => { m.style.backgroundImage = `url('${g[gi]}')`; nav.querySelector("span").textContent = `${gi + 1} / ${g.length}`; };
@@ -106,3 +106,7 @@ document.addEventListener("click", (e) => {
   e.stopPropagation();
   const n = b.nextElementSibling; if (n) n.hidden = !n.hidden;
 });
+
+// Videos show a still frame and play (muted) only while hovered or tapped.
+document.addEventListener("mouseover", (e) => { const v = e.target.closest?.("video.hover-play"); if (v) { v.muted = true; v.play().catch(() => {}); } });
+document.addEventListener("mouseout", (e) => { const v = e.target.closest?.("video.hover-play"); if (v && !v.contains(e.relatedTarget)) v.pause(); });
