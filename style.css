@@ -149,3 +149,7 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:16px;fl
 .saxon-logo:hover img{transform:scale(1.06)}
 .nda-note{font-size:.85rem;color:var(--muted);margin-top:8px;padding:8px 12px;border:1px solid var(--line);border-radius:var(--r);background:var(--bg2);max-width:420px}
 .nda-note[hidden],#m-nda[hidden]{display:none}
+.modal-img{background-size:contain;background-repeat:no-repeat;background-color:var(--bg2)}
+.m-gal{display:flex;align-items:center;justify-content:center;gap:12px;padding:10px 0 0;color:var(--muted);font-size:.85rem}
+.m-gal[hidden]{display:none}
+#m-link[hidden]{display:none}

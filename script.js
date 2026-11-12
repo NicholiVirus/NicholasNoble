@@ -57,6 +57,10 @@ document.addEventListener("click", e=>{
   const el = e.target.closest("[data-i]"); if(!el) return;
   const p = P[el.dataset.i], m = document.getElementById("m-img");
   m.className = p.image ? "modal-img" : "modal-img ph"; m.style.backgroundImage = p.image?`url('${p.image}')`:""; m.textContent = phText(p);
+  const g = p.gallery || [], nav = document.getElementById("m-gal");
+  nav.hidden = g.length < 2; let gi = 0;
+  const showG = () => { m.style.backgroundImage = `url('${g[gi]}')`; nav.querySelector("span").textContent = `${gi + 1} / ${g.length}`; };
+  if (g.length > 1) { showG(); nav.querySelector(".gp").onclick = (ev) => { ev.stopPropagation(); gi = (gi + g.length - 1) % g.length; showG(); }; nav.querySelector(".gn").onclick = (ev) => { ev.stopPropagation(); gi = (gi + 1) % g.length; showG(); }; }
   document.getElementById("m-tags").textContent = `${p.year} · ${p.tags.join(", ")}`;
   document.getElementById("m-title").textContent = p.title;
   document.getElementById("m-desc").textContent = p.desc;
