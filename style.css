@@ -157,3 +157,5 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:16px;fl
 .m-video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
 video.story-img{background:#000}
 .card video.hover-play{width:100%;height:100%;object-fit:cover;display:block}
+.card .img.no-img{display:flex;align-items:flex-end;padding:20px;background:linear-gradient(135deg,var(--bg2),var(--card));font-family:var(--serif);font-size:1.4rem;font-weight:600;color:var(--muted)}
+.modal-img[hidden]{display:none}

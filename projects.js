@@ -30,7 +30,7 @@ window.PROJECTS = [
   { img: "12", title: "Adaptive Basketball Catapult", year: 2024, tags: ["cad","fabrication","leadership"], featured: true, image: "assets/photos/catapult.jpg", video: "assets/video/catapult.mp4",
     blurb: "A catapult I built in 8th grade so a student with a disability could play basketball at school.",
     desc: "In 2024, during 8th grade, I designed and built a catapult for my school so a student with a disability could shoot baskets and play alongside classmates. The build had to be safe, easy to operate, and adjustable for distance and arc." },
-  { img: "13", title: "VEX Robotics Season", year: 2023, tags: ["robotics"], featured: false, image: "",
+  { img: "13", title: "VEX Robotics Season", year: 2023, tags: ["robotics"], featured: false, image: "", noImage: true,
     blurb: "One season of VEX: designing, building and driving a competition robot.",
     desc: "Competed in VEX Robotics for one season in 2023: designing, building and driving a competition robot." },
   { img: "14", title: "LEGO Battlebots", year: 2022, tags: ["robotics","fabrication"], featured: false, image: "assets/photos/battlebot.jpg",
