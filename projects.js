@@ -40,8 +40,9 @@ window.PROJECTS = [
     blurb: "A browser-based, multiplayer 3D simulator of Bunnybots 2026 that I built to test strategy and robot designs.",
     desc: "Harvest Havoc Sim recreates Blair Bunnybots 2026 from the official field CAD and game manual: swerve driving, AI opponents, scoring, fouls and ranking points. You can configure each robot's mechanisms (ground, depot and ramp intakes, elevator height, passthrough or hopper layouts) to compare designs before building. Play it at toungesimbunnybots.onrender.com. Code: github.com/NicholiVirus/TongueSimBunnybots", link: "https://toungesimbunnybots.onrender.com/" },
   // ---- CAD slots: send CAD screenshots/renders for these numbers ----
-  { img: "09", title: "CAD Design (coming soon)", year: 2026, tags: ["cad"], featured: false, image: "",
-    blurb: "Placeholder for a CAD model (Fusion 360 / Onshape / Inventor).", desc: "Details coming soon." },
+  { img: "09", title: "Bunnybots 2026 Robot CAD", year: 2026, tags: ["cad","robotics"], featured: false, image: "assets/photos/cad-bb26.png",
+    blurb: "Full Onshape assembly of Team 611's Bunnybots 2026 robot: elevator, intake, swerve drivebase and polycarbonate hopper.",
+    desc: "As CAD & Fabrication Lead for Team 611, I designed the Bunnybots 2026 robot in Onshape: a tall elevator for reaching the pantry shelves, a front intake, a swerve drivebase and clear polycarbonate side plates. You can spin the 3D model in the viewer at the top of the page." },
   { img: "10", title: "CAD Design (coming soon)", year: 2026, tags: ["cad"], featured: false, image: "",
     blurb: "Placeholder for a CAD model.", desc: "Details coming soon." },
   { img: "11", title: "CAD Design (coming soon)", year: 2026, tags: ["cad"], featured: false, image: "",
