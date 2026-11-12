@@ -100,6 +100,17 @@ function mount(el) {
   // Only pause the rotation between robots while someone is actually dragging the model.
   controls.addEventListener("start", () => { dragging = true; clearTimeout(timer); });
   controls.addEventListener("end", () => { dragging = false; schedule(); });
+  // After a drag, glide back to the spawn height (looking down at the top of the robot) and keep orbiting.
+  let homePolar = null, homeDist = null;
+  const sph = new THREE.Spherical();
+  function settle() {
+    if (dragging || homePolar === null) return;
+    sph.setFromVector3(camera.position);
+    const dp = homePolar - sph.phi, dr = homeDist - sph.radius;
+    if (Math.abs(dp) < 1e-4 && Math.abs(dr) < 1e-4) return;
+    sph.phi += dp * 0.06; sph.radius += dr * 0.06;
+    camera.position.setFromSpherical(sph);
+  }
   [...dots.children].forEach((d, k) => d.onclick = () => show(k));
 
   function frame(root) {
@@ -107,6 +118,7 @@ function mount(el) {
     camera.position.copy(new THREE.Vector3(1, 0.6, 1).normalize().multiplyScalar(r / Math.sin(THREE.MathUtils.degToRad(camera.fov / 2)) * 1.05));
     camera.near = r / 50; camera.far = r * 20; camera.updateProjectionMatrix();
     controls.target.set(0, 0, 0); controls.update();
+    const s0 = new THREE.Spherical().setFromVector3(camera.position); homePolar = s0.phi; homeDist = s0.radius;
   }
   function prepare(root) {
     root.rotation.x = -Math.PI / 2; // Onshape is Z-up, three.js is Y-up
@@ -130,7 +142,7 @@ function mount(el) {
     const w = canvas.clientWidth, h = canvas.clientHeight;
     if (canvas.width !== Math.round(w * renderer.getPixelRatio())) { renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
   }
-  renderer.setAnimationLoop(() => { resize(); controls.update(); renderer.render(scene, camera); });
+  renderer.setAnimationLoop(() => { resize(); settle(); controls.update(); renderer.render(scene, camera); });
 }
 
 // The models ship as glTF JSON with one base64 buffer (artifact hosting won't serve .glb).
