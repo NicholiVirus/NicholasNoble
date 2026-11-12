@@ -60,6 +60,8 @@ document.addEventListener("click", e=>{
   document.getElementById("m-tags").textContent = `${p.year} · ${p.tags.join(", ")}`;
   document.getElementById("m-title").textContent = p.title;
   document.getElementById("m-desc").textContent = p.desc;
+  document.getElementById("m-nda").hidden = !p.nda;
+  document.querySelectorAll("#m-nda .nda-note").forEach((n) => n.hidden = true);
   const ml = document.getElementById("m-link");
   if (p.link) { ml.href = p.link; ml.hidden = false; } else ml.hidden = true;
   modal.hidden = false;
@@ -91,3 +93,10 @@ document.getElementById("yr").textContent = new Date().getFullYear();
   });
 })();
 
+
+// "Code on GitHub" for NDA projects: reveal a note instead of linking out.
+document.addEventListener("click", (e) => {
+  const b = e.target.closest(".nda-btn"); if (!b) return;
+  e.stopPropagation();
+  const n = b.nextElementSibling; if (n) n.hidden = !n.hidden;
+});

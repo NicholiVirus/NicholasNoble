@@ -147,3 +147,5 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:16px;fl
 .saxon-title{display:flex;align-items:center;gap:14px}
 .saxon-logo img{width:52px;height:52px;border-radius:10px;display:block;transition:transform .2s}
 .saxon-logo:hover img{transform:scale(1.06)}
+.nda-note{font-size:.85rem;color:var(--muted);margin-top:8px;padding:8px 12px;border:1px solid var(--line);border-radius:var(--r);background:var(--bg2);max-width:420px}
+.nda-note[hidden],#m-nda[hidden]{display:none}
