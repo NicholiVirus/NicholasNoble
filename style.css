@@ -143,3 +143,4 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:16px;fl
 .cad-photo{position:absolute;top:0;left:0;width:100%;aspect-ratio:1/1;object-fit:cover;border:1px solid var(--line);border-radius:var(--r)}
 .cad-photo[hidden]{display:none}
 .story-img.portrait{aspect-ratio:auto;max-width:320px;height:auto}
+.cad-fine{font-size:.7rem;color:var(--muted);margin-top:6px;opacity:.8}
