@@ -144,3 +144,6 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:16px;fl
 .cad-photo[hidden]{display:none}
 .story-img.portrait{aspect-ratio:auto;max-width:320px;height:auto}
 .cad-fine{font-size:.7rem;color:var(--muted);margin-top:6px;opacity:.8}
+.saxon-title{display:flex;align-items:center;gap:14px}
+.saxon-logo img{width:52px;height:52px;border-radius:10px;display:block;transition:transform .2s}
+.saxon-logo:hover img{transform:scale(1.06)}
