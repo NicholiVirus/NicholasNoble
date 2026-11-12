@@ -12,7 +12,7 @@ window.PROJECTS = [
   { img: "03", title: "FRC 2026 REBUILT Robot", year: 2026, tags: ["robotics","cad","fabrication"], featured: true, image: "assets/photos/robot-hero.jpg",
     blurb: "Saxon Robotics. Designed in Onshape on Team 526 (Alliance 8 captain at FCH Alexandria), then rebuilt with Team 611: 16th of 30 at WV ROCKS.",
     desc: "As co-leader of Team 526's mechanical and construction team (Saxon Robotics B team), I led the design of our 2026 FIRST Robotics competition robot and managed building and testing. I lead a mechanical and construction team of 10 freshmen and sophomores." },
-  { img: "04", title: "Bunnybots 2025: 12th Place", year: 2025, tags: ["robotics","fabrication"], featured: true, image: "",
+  { img: "04", title: "Bunnybots 2025: 12th Place", year: 2025, tags: ["robotics","fabrication"], featured: true, image: "assets/photos/bb25-card.jpg",
     blurb: "My first build season with Saxon Robotics Team 526. We placed 12th at Blair Bunnybots 2025.",
     desc: "I led the mechanical and construction team through the design, build and iteration of this robot, which placed 12th at Blair Bunnybots 2025." },
   { img: "05", title: "NYU Autonomous Vehicle", year: 2025, tags: ["robotics","electronics","software"], featured: false, image: "",

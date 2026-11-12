@@ -14,9 +14,9 @@ const GAMES = {
   havoc: { name: "Harvest Havoc", season: "Bunnybots 2026", logo: "",
     url: "https://robot.mbhs.edu/bunnybots" },
 };
-// Chronological. Robots without a model yet show a "CAD coming soon" card in the rotation.
+// Chronological. Robots without a model show their photo (if set), otherwise a "CAD coming soon" card.
 const ROBOTS = [
-  { name: "Bunnybots 2025 robot", note: "Team 526 · placed 12th", src: "", game: GAMES.bunny25 },
+  { name: "Bunnybots 2025 robot", note: "Team 526 · placed 12th", src: "", photo: "assets/photos/bb25.jpg", game: GAMES.bunny25 },
   { name: "First robot", note: "Team 526 · my first full robot CAD", src: "assets/cad/robot-v1.json", game: GAMES.rebuilt },
   { name: "Rebuilt robot", note: "Team 611 · rebuilt for WV ROCKS, 16th of 30", src: "assets/cad/robot-v2.json", game: GAMES.rebuilt },
   { name: "Bunnybots 2026 robot", note: "Team 611 · I lead CAD & fabrication · in progress", src: "", game: GAMES.havoc },
@@ -45,6 +45,7 @@ function mount(el) {
   const pivot = new THREE.Group(); scene.add(pivot);
   const loader = new GLTFLoader();
   const status = el.querySelector(".cad-status");
+  const photo = el.querySelector(".cad-photo");
   const nameEl = el.querySelector(".cad-name"), noteEl = el.querySelector(".cad-note");
   const badge = el.querySelector(".game-badge"), dots = el.querySelector(".cad-dots");
   const cache = new Map();
@@ -75,13 +76,18 @@ function mount(el) {
     }
     canvas.classList.add("fading");
     if (!r.src) { // no CAD yet: placeholder card
-      setTimeout(() => { if (ROBOTS[cur] !== r) return; pivot.clear(); status.hidden = false; status.textContent = "CAD coming soon"; }, 250);
+      setTimeout(() => {
+        if (ROBOTS[cur] !== r) return;
+        pivot.clear();
+        if (r.photo) { photo.src = r.photo; photo.alt = r.name; photo.hidden = false; status.hidden = true; }
+        else { status.hidden = false; status.textContent = "CAD coming soon"; }
+      }, 250);
       return schedule();
     }
     if (!cache.has(r.src)) { status.hidden = false; status.textContent = "Loading model…"; }
     Promise.all([load(r.src), new Promise((ok) => setTimeout(ok, 250))]).then(([root]) => {
       if (ROBOTS[cur] !== r) return;
-      pivot.clear(); pivot.add(root); frame(root);
+      photo.hidden = true; pivot.clear(); pivot.add(root); frame(root);
       status.hidden = true; canvas.classList.remove("fading");
       const next = ROBOTS.slice(cur + 1).concat(ROBOTS).find((x) => x.src); if (next) load(next.src); // preload the next model
     }).catch((e) => { console.error(e); status.hidden = false; status.textContent = "Model failed to load."; });

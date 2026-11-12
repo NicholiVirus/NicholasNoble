@@ -140,3 +140,6 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:16px;fl
 @media(prefers-reduced-motion:reduce){.g-frame{transition:none}}
 .sim-note{font-size:.82rem;margin-top:8px}
 .story-img.ph{display:flex}
+.cad-photo{position:absolute;top:0;left:0;width:100%;aspect-ratio:1/1;object-fit:cover;border:1px solid var(--line);border-radius:var(--r)}
+.cad-photo[hidden]{display:none}
+.story-img.portrait{aspect-ratio:auto;max-width:320px;height:auto}
