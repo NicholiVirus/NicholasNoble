@@ -44,7 +44,7 @@ const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.ta
 function render(f){
   grid.innerHTML = order(P.filter(p=>f==="all"||p.tags.includes(f))).map(p=>`
     <article class="card" data-i="${P.indexOf(p)}">
-      ${p.noImage ? `<div class="img no-img"><span>${p.title}</span></div>` : p.video ? `<div class="img"><video class="hover-play" src="${p.video}" poster="${p.image}" muted loop playsinline preload="none"></video></div>` : `<div class="${imgClass(p)}" ${imgStyle(p)}>${phText(p)}</div>`}
+      ${p.noImage ? `` : p.video ? `<div class="img"><video class="hover-play" src="${p.video}" poster="${p.image}" muted loop playsinline preload="none"></video></div>` : `<div class="${imgClass(p)}" ${imgStyle(p)}>${phText(p)}</div>`}
       <div class="body"><span class="tag-line">${p.year} · ${p.tags.join(", ")}</span>
       <h3>${p.title}</h3><p>${p.blurb}</p></div>
     </article>`).join("");
