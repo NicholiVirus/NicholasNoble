@@ -38,7 +38,7 @@ window.PROJECTS = [
     desc: "Competed in LEGO Battlebots from 2022 to 2023, designing and building combat robots out of LEGO Technic for head-to-head matches." },
   { img: "16", title: "Harvest Havoc Strategy Simulator", year: 2026, tags: ["software","robotics"], featured: true, image: "assets/photos/sim.webp",
     blurb: "A browser-based, multiplayer 3D simulator of Bunnybots 2026 that I built to test strategy and robot designs.",
-    desc: "Harvest Havoc Sim recreates Blair Bunnybots 2026 from the official field CAD and game manual: swerve driving, AI opponents, scoring, fouls and ranking points. You can configure each robot's mechanisms (ground, depot and ramp intakes, elevator height, passthrough or hopper layouts) to compare designs before building. Play it at toungesimbunnybots.onrender.com. Code: github.com/NicholiVirus/TongueSimBunnybots", link: "https://toungesimbunnybots.onrender.com/" },
+    desc: "Harvest Havoc Sim recreates Blair Bunnybots 2026 from the official field CAD and game manual: swerve driving, AI opponents, scoring, fouls and ranking points. You can configure each robot's mechanisms (ground, depot and ramp intakes, elevator height, passthrough or hopper layouts) to compare designs before building. Play it at toungesimbunnybots.onrender.com.", link: "https://toungesimbunnybots.onrender.com/" },
   // ---- CAD slots: send CAD screenshots/renders for these numbers ----
   { img: "09", title: "Bunnybots 2026 Robot CAD", year: 2026, tags: ["cad","robotics"], featured: false, image: "assets/photos/cad-bb26.png",
     blurb: "Full Onshape assembly of Team 611's Bunnybots 2026 robot: elevator, intake, swerve drivebase and polycarbonate hopper.",
