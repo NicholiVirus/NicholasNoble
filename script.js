@@ -32,11 +32,17 @@ let sx=0; car.addEventListener("touchstart",e=>sx=e.touches[0].clientX,{passive:
 car.addEventListener("touchend",e=>{const dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>50){go(cur+(dx<0?1:-1));auto();}});
 go(0); auto();
 
-// Grid
+// Grid: newest first, then manual tweaks (VEX last, LEGO builds 4 spots higher).
+function order(list){
+  const l=[...list].sort((a,b)=>b.year-a.year);
+  const mv=(re,fn)=>{const i=l.findIndex(p=>re.test(p.title)); if(i<0) return; const [p]=l.splice(i,1); l.splice(Math.max(0,Math.min(l.length,fn(i))),0,p);};
+  mv(/^VEX/,()=>l.length); mv(/LEGO Technic/,i=>i-4);
+  return l;
+}
 const grid = document.getElementById("grid");
 const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}}),{threshold:.1});
 function render(f){
-  grid.innerHTML = P.filter(p=>f==="all"||p.tags.includes(f)).sort((a,b)=>b.year-a.year).map(p=>`
+  grid.innerHTML = order(P.filter(p=>f==="all"||p.tags.includes(f))).map(p=>`
     <article class="card" data-i="${P.indexOf(p)}">
       ${p.noImage ? `<div class="img no-img"><span>${p.title}</span></div>` : p.video ? `<div class="img"><video class="hover-play" src="${p.video}" poster="${p.image}" muted loop playsinline preload="none"></video></div>` : `<div class="${imgClass(p)}" ${imgStyle(p)}>${phText(p)}</div>`}
       <div class="body"><span class="tag-line">${p.year} · ${p.tags.join(", ")}</span>
