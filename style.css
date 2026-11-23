@@ -159,3 +159,27 @@ video.story-img{background:#000}
 .card video.hover-play{width:100%;height:100%;object-fit:cover;display:block}
 .card .img.no-img{display:flex;align-items:flex-end;padding:20px;background:linear-gradient(135deg,var(--bg2),var(--card));font-family:var(--serif);font-size:1.4rem;font-weight:600;color:var(--muted)}
 .modal-img[hidden]{display:none}
+/* ===== Desktop layout: text on the left, pictures on the right ===== */
+@media (min-width:1000px){
+  main{max-width:1240px}
+  /* projects: one row per project */
+  .grid{grid-template-columns:1fr;gap:0}
+  .card{display:grid;grid-template-columns:1fr minmax(320px,440px);gap:40px;align-items:center;padding:28px 0;border-top:1px solid var(--line)}
+  .card .img{grid-column:2;grid-row:1}
+  .card .body{grid-column:1;grid-row:1;padding:0}
+  .card h3{font-family:var(--serif);font-size:1.5rem;margin:6px 0 10px}
+  .card p{font-size:1rem;max-width:560px}
+  .card:hover{transform:none}
+  /* story + timeline entries that carry media */
+  .story>li>div:has(.story-img,.loop,.loops),
+  .timeline li:has(> .story-img){display:grid;grid-template-columns:1fr minmax(320px,460px);column-gap:40px;align-items:start}
+  .story>li>div:has(.story-img,.loop,.loops)>*{grid-column:1}
+  .story>li>div>.story-img,.story>li>div>.loop,.story>li>div>.loops{grid-column:2;grid-row:1 / span 20;margin-top:0;max-width:none}
+  .story>li>div>.loops{grid-template-columns:1fr}
+  .timeline li:has(> .story-img){grid-template-columns:140px 1fr minmax(300px,420px)}
+  .timeline li:has(> .story-img)>*:not(.date){grid-column:2}
+  .timeline li>.story-img{grid-column:3 !important;grid-row:1 / span 20;margin-top:0;max-width:none}
+  .story-img.portrait{max-width:300px !important;justify-self:end}
+  .story p{max-width:none}
+}
+@media (min-width:1000px){.timeline li>.nda-btn{justify-self:start}.timeline li:has(> .story-img){column-gap:28px}}
